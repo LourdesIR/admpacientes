@@ -20,6 +20,6 @@ Cita.propTypes = {
     crearCita: PropTypes.object.isRequired,
     eliminarCita: PropTypes.func.isRequired,
   }
-
+ 
 
 export default Cita;

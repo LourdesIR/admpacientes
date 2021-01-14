@@ -13,7 +13,7 @@ function App() {
   }
 
   //citasIniciales pasa a ser el arreglo inicial de citas, por si hay alguna guardada en la maquina del usuario.
-  //Arregglo de Citas (con S) son todas las citas - setCitas es GuardarCitas en este caso
+  //Arreglo de Citas (con S) son todas las citas - setCitas es GuardarCitas en este caso
   const [citas,setCitas] = useState(citasIniciales)
 
   //Ejemplo de uso de useState cuando cambia citas - No cuenta cuando hay un error en el formulario
@@ -31,7 +31,7 @@ function App() {
     }
   }, [citas]);
 
-  //Funcion que toma las citas actuales y aggrega las nuevas
+  //Funcion que toma las citas actuales y agrega las nuevas
   const crearCita = cita => {
     setCitas([
       ...citas,
@@ -47,7 +47,7 @@ function App() {
   
   }
 
-  //Menssajes condicional con ternario cuando no hay citas
+  //Mensajes condicional con ternario cuando no hay citas
   const titulo = citas.length === 0 ? 'No hay citas aún': 'Administra tus citas' ;
 
   return (
