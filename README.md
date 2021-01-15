@@ -289,7 +289,9 @@ citasIniciales=[];
 
 const [citas,setCitas] = useState(citasIniciales)
 
-*Ejemplo de uso de useState cuando cambia citas - No cuenta cuando hay un error en el formulario este paso no es necesario en esta aplicacion.*
+```
+
+_Ejemplo de uso de useState cuando cambia citas - No cuenta cuando hay un error en el formulario este paso no es necesario en esta aplicacion._
 Los corchetes [] se usan para que no se arme un ciclo y solo se ejecute uno por vez.
 En este caso se usa para guardar con los cambios de estados.
 
@@ -303,7 +305,7 @@ console.log('Has creado o eliminado una cita');
 
 ## Paso 4 - Prototype
 
->PropTypes sirven para validar los tipos de datos usados - es como realizar >un modelo de datos dentro del mismo componente.
+> PropTypes sirven para validar los tipos de datos usados - es como realizar >un modelo de datos dentro del mismo componente.
 
 #### ----- En Formulario.js ------
 
@@ -359,8 +361,6 @@ useEffect (() => {
 ```
 
 Bueno espero que les sirva como a mi. Se que hay comentarios que parecen basicos, pero nunca esta de mas recalcar un concepto.
-
-
 
 ## -- React y node --
 
@@ -434,4 +434,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 #### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+
 ```
