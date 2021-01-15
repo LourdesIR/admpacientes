@@ -11,20 +11,22 @@
 
 #### ----- En Index.html ------
 
-<!-- Modifico el Title y Agrego los 3 links siguientes -->
+_Modifico el Title y Agrego los 3 links siguientes_
+
  <title>Administración de Pacientes</title>
     
-<!-- Normalize ayuda a hacer responcive la pagina -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+*Normalize ayuda a hacer responcive la pagina*
+<https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-<!-- Coloco una fuente de google -->
-<link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
-    
-<!-- Uso Skeleton -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+_Coloco una fuente de google_
+<https://fonts.googleapis.com/css?family=Staatliches>
+
+_Uso Skeleton_
+<https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 
 #### ----- En App.js ------
 
+```
 import React, { Fragment , useState, useEffect} from 'react';
 import Formulario from './components/Formulario'
 import Cita from './components/Cita'
@@ -69,7 +71,7 @@ return (
 <div className="one-half column">
 <h2>{titulo}</h2>
 {citas.map( cita => (
-<Cita 
+<Cita
             key={cita.id}
             cita={cita}
             eliminarCita={eliminarCita}
@@ -84,13 +86,15 @@ return (
 }
 
 export default App;
+```
 
-\*\* Segun el profesor del curso por internet, cuando se mapea un elemento es necesario ponerle un KEY que para nosotros es en este caso cita.id
+Cuando se mapea un elemento es necesario ponerle un KEY que para nosotros es en este caso cita.id
 
 #### ----- En Formulario.js ------
 
-\*\*crear carpeta components en el SRC y colocar los componentes dentro.
+Crear carpeta components en el SRC y colocar los componentes dentro.
 
+```
 import React, {Fragment, useState} from 'react';
 
 function App() {
@@ -176,8 +180,11 @@ const Formulario = ({crearCita}) => {
 
 export default Formulario;
 
+```
+
 #### ----- En Cita.js ------
 
+```
 import React from 'react';
 
 //Propiedades pasadas desde app.js
@@ -199,27 +206,29 @@ const Cita = ({cita, eliminarCita}) => (
 );
 
 export default Cita;
+```
 
 ## Paso 2 - Formulario.js Manejo de datos, errores y id.
 
-\*\*Una vez creado el state de citas con su objeto
+> Una vez creado el state de citas con su objeto
+> Agrego uuid con npm i uuid (este sirve para crear ids aleatorios) luego:
+> import uuid from 'uuid/dist/v4';
 
-//Agrego uuid con npm i uuid (este sirve para crear ids aleatorios) luego:
-import uuid from 'uuid/dist/v4';
+En el archivo luego de state citas:
 
-\*\*En el archivo luego de state citas:
+Funcion que se ejecuta cuando el usuario escribe en el input.
+State de Errores para verificar formulario, comienza en 'false' o 'null' porque el formulario aun no ha sido validado.
 
-    //Funcion que se ejecuta cuando el usuario escribe en el input.
-
-    //State de Errores para verificar formulario, comienza en 'false' o 'null' porque el formulario aun no ha sido validado.
-     const [err , actualizarError] = useState(false)
+```
+const [err , actualizarError] = useState(false)
 
     //e me sirve para obtener informacion de los cambios en los inputs/TextArea e.target.value devuelve el valor de lo que se escribe.
     //En javaScript podria poner cita.paciente = e.target.value pero NO es una practica de React, entonces se usa setcita.
 
-    const handleChange = e => {
-        setCita({
-            ...cita, //es una copia de las citas inicial o actual, hecha con spread operator para que no solo devuelva el valor de e.target.
+const handleChange = e => {
+setCita({
+...cita, //es una copia de las citas inicial o actual, hecha con spread operator para que no solo devuelva el valor de e.target.
+
             [e.target.name]: e.target.value //[e.target.name] es una destructuracion y se puede utilizar en este caso porque hicimos coincidir los name del input con las propiedades del objetos.
         })
         }
@@ -260,15 +269,16 @@ import uuid from 'uuid/dist/v4';
             hora:'',
             sintomas:'',
         })
+```
 
 ## Paso 3 - Pasar Citas ya creadas al Local Store.
 
 #### ----- En App.js ------
 
-//Citas en LocalStorage
+Citas en LocalStorage
+Local Storage solo guarda string por eso debemos usar JSON.parse
 
-//Local Storage solo guarda string por eso debemos usar JSON.parse
-
+```
 let citasIniciales = JSON.parse(localStorage.getItem('citas'));
 if(!citasIniciales){
 citasIniciales=[];
@@ -279,32 +289,43 @@ citasIniciales=[];
 
 const [citas,setCitas] = useState(citasIniciales)
 
-\*\*Ejemplo de uso de useState cuando cambia citas - No cuenta cuando hay un error en el formulario este paso no es necesario en esta aplicacion.
-//Los corchetes [] se usan para que no se arme un ciclo y solo se ejecute uno por vez
-//Se usa para guardar con los cambios de estados.
+*Ejemplo de uso de useState cuando cambia citas - No cuenta cuando hay un error en el formulario este paso no es necesario en esta aplicacion.*
+Los corchetes [] se usan para que no se arme un ciclo y solo se ejecute uno por vez.
+En este caso se usa para guardar con los cambios de estados.
+
+```
 
 useEffect (() => {
 console.log('Has creado o eliminado una cita');
 }, []);
 
+```
+
 ## Paso 4 - Prototype
 
-//PropTypes sirven para validar los tipos de datos usados - es como realizar un modelo de datos dentro del mismo componente.
+>PropTypes sirven para validar los tipos de datos usados - es como realizar >un modelo de datos dentro del mismo componente.
 
 #### ----- En Formulario.js ------
 
+```
+
 import PropTypes from 'prop-types';
 
-//Luego de la funcion formulario, antes del export.
+//Ubicacion: Luego de la funcion formulario, antes del export.
 //Solo se crea el prototypo de 'crearCitas' porque es la unica propiedad que se le pasa a formulario desde el App.js
 
 Formulario.propTypes = {
 crearCita: PropTypes.func.isRequired
 }
 
+```
+
 #### ----- En Cita.js ------
 
-//En este caso se le pasan 2 propiedades desde App.js
+En este caso se le pasan 2 propiedades desde App.js
+
+```
+
 import PropTypes from 'prop-types';
 
 Cita.propTypes = {
@@ -312,9 +333,13 @@ crearCita: PropTypes.object.isRequired,
 eliminarCita: PropTypes.func.isRequired,
 }
 
+```
+
 #### ----- En App.js ------
 
-//En useEffect se agrega:
+En useEffect se agrega:
+
+```
 
 useEffect (() => {
 //se reedeclara citasIniciales dentro de useEffect para que no de error la funcion PropType del componente citas:
@@ -329,7 +354,13 @@ useEffect (() => {
       localStorage.setItem('citas', JSON.stringify([]))
     }
 
-}, [citas]);s
+}, [citas]);
+
+```
+
+Bueno espero que les sirva como a mi. Se que hay comentarios que parecen basicos, pero nunca esta de mas recalcar un concepto.
+
+
 
 ## -- React y node --
 
@@ -403,3 +434,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 #### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
